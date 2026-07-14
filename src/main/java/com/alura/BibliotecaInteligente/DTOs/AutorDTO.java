@@ -7,7 +7,7 @@ public record AutorDTO(
         Long id,
         String nome,
         String pais,
-        LocalDate dataNascimento,
+        String dataNascimento,
         List<String> livros
 ) {
 }
