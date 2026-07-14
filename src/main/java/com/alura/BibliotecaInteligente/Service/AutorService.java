@@ -2,6 +2,7 @@ package com.alura.BibliotecaInteligente.Service;
 
 import com.alura.BibliotecaInteligente.DTOs.AutorDTO;
 import com.alura.BibliotecaInteligente.Entity.Autor;
+import com.alura.BibliotecaInteligente.Entity.Livro;
 import com.alura.BibliotecaInteligente.Repository.AutorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AutorService {
     private final AutorRepository autorRepository;
+
+    public void salvarAutor(Autor a){
+        Optional<Autor> autorRep = autorRepository.findById(a.getId());
+
+        if (autorRep.isPresent()){
+            throw new RuntimeException("Autor com id "+a.getId()+" ja esta cadastrado no banco.");
+        }
+
+        autorRepository.save(a);
+        System.out.println(a.getNome()+" salvo com sucesso!");
+    }
 
     public AutorDTO converterParaAutorDTO(Autor a){
         List<String> livros = new ArrayList<>();
