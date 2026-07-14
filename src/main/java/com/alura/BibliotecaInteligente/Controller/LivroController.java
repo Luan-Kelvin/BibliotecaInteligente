@@ -27,4 +27,9 @@ public class LivroController {
         return livroService.obterLivrosDeAutor(nome);
     }
 
+    @GetMapping("/caros")
+    public List<LivroDTO> livrosCaros(){
+        return livroService.livrosCaros();
+    }
+
 }

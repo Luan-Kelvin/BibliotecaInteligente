@@ -64,4 +64,20 @@ public class LivroService {
 
         return dtos;
     }
+
+    public List<LivroDTO> livrosCaros(){
+        List<Livro> caros = livroRepository.obterLivrosCaros();
+
+        if (caros.isEmpty()){
+            throw new RuntimeException("Nenhum livro cadastrado, lista está vazia.");
+        }
+
+        List<LivroDTO> dtos = new ArrayList<>();
+
+        caros.forEach(l -> {
+            dtos.add(converterParaDto(l));
+        });
+
+        return dtos;
+    }
 }

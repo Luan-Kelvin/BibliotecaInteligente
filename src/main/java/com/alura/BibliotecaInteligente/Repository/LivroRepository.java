@@ -11,4 +11,13 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
 
     @Query(value = "SELECT * FROM biblioteca.livros_autor(:nome)", nativeQuery = true)
     List<Livro> obterLivrosDeUmAutro(@Param("nome") String nome);
+
+//    @Query("""
+//            SELECT l
+//            FROM Livro l
+//            ORDER BY l.preco DESC
+//            LIMIT 10
+//            """)
+    @Query(value = "SELECT * FROM biblioteca.livros_caros()", nativeQuery = true)
+    List<Livro> obterLivrosCaros();
 }
