@@ -8,8 +8,7 @@ public record LivroDTO(
          Double preco,
          Integer estoque,
          Integer anoPublicacao,
-         String autor,
-         Long idAutor,
+         AutorDTO autor,
          List<String> categorias
 ) {
 }

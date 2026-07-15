@@ -10,4 +10,6 @@ public class BibliotecaInteligenteApplication {
 		SpringApplication.run(BibliotecaInteligenteApplication.class, args);
 	}
 
+	// CRIE METODOS PARA ADICIONAR LIVROS AUM NOVO AUTOR CRIADO E METODO POST PARA DICIONAR NOVOS LIVROS
+
 }

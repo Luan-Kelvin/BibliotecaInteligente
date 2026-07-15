@@ -6,8 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LivroRepository extends JpaRepository<Livro, Long> {
+
+    Optional<Livro> findByTituloIgnoreCase(String nome);
 
     @Query(value = "SELECT * FROM biblioteca.livros_autor(:nome)", nativeQuery = true)
     List<Livro> obterLivrosDeUmAutro(@Param("nome") String nome);

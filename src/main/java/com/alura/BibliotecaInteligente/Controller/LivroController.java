@@ -3,10 +3,7 @@ package com.alura.BibliotecaInteligente.Controller;
 import com.alura.BibliotecaInteligente.DTOs.LivroDTO;
 import com.alura.BibliotecaInteligente.Service.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +17,11 @@ public class LivroController {
     @GetMapping
     public List<LivroDTO> obterTodosOsLivros(){
         return livroService.obterTodosOsLivrosDTO();
+    }
+
+    @PostMapping
+    public LivroDTO adicionarLivro(@RequestBody LivroDTO livroDTO){
+        return livroService.adicionarLivro(livroDTO);
     }
 
     @GetMapping("/autor/{nome}")
