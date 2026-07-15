@@ -1,6 +1,5 @@
 package com.alura.BibliotecaInteligente.DTOs;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public record AutorDTO(

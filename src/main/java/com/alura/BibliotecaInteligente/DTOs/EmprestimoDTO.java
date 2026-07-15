@@ -11,6 +11,8 @@ public record EmprestimoDTO(
 
          String status,
 
-         String livro
+         String livro,
+
+         Long idLivro
 ) {
 }

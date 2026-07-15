@@ -5,8 +5,11 @@ import com.alura.BibliotecaInteligente.Entity.Autor;
 import com.alura.BibliotecaInteligente.Entity.Livro;
 import com.alura.BibliotecaInteligente.Repository.AutorRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,17 +17,24 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AutorService {
+    private static final Logger logger = LoggerFactory.getLogger(AutorService.class);
     private final AutorRepository autorRepository;
 
-    public void salvarAutor(Autor a){
-        Optional<Autor> autorRep = autorRepository.findById(a.getId());
+    public AutorDTO salvarAutor(AutorDTO a){
+        Optional<Autor> autorRep = autorRepository.findByNomeIgnoreCase(a.nome());
 
         if (autorRep.isPresent()){
-            throw new RuntimeException("Autor com id "+a.getId()+" ja esta cadastrado no banco.");
+            throw new RuntimeException("Autor com id "+a.id()+" ja esta cadastrado no banco.");
         }
 
-        autorRepository.save(a);
-        System.out.println(a.getNome()+" salvo com sucesso!");
+        List<Livro> livros = new ArrayList<>();
+
+        Autor autor = new Autor(a.nome(), a.pais(), LocalDate.parse(a.dataNascimento()));
+
+        autorRepository.save(autor);
+        logger.info("Autor "+autor.getNome()+" cadastrado com sucesso!");
+
+        return converterParaAutorDTO(autor);
     }
 
     public AutorDTO converterParaAutorDTO(Autor a){

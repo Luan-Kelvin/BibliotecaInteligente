@@ -3,9 +3,7 @@ package com.alura.BibliotecaInteligente.Controller;
 import com.alura.BibliotecaInteligente.DTOs.EmprestimoDTO;
 import com.alura.BibliotecaInteligente.Service.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class EmprestimoController {
     @GetMapping
     public List<EmprestimoDTO> obterEmprestimos(){
         return emprestimoService.obterEmprestimos();
+    }
+
+    @PostMapping
+    public EmprestimoDTO realizarEmprestimo(@RequestBody EmprestimoDTO emprestimoDTO){
+        return emprestimoService.realizarEmprestimo(emprestimoDTO);
     }
 }
