@@ -20,4 +20,11 @@ public interface LivroRepository extends JpaRepository<Livro, Long> {
 //            """)
     @Query(value = "SELECT * FROM biblioteca.livros_caros()", nativeQuery = true)
     List<Livro> obterLivrosCaros();
+
+    @Query("""
+            SELECT l
+            FROM Livro l
+            WHERE l.estoque = 0
+            """)
+    List<Livro> estoqueVazio();
 }

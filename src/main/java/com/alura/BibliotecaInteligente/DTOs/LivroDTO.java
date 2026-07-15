@@ -9,6 +9,7 @@ public record LivroDTO(
          Integer estoque,
          Integer anoPublicacao,
          String autor,
+         Long idAutor,
          List<String> categorias
 ) {
 }

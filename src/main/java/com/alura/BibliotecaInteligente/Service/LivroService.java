@@ -4,6 +4,8 @@ import com.alura.BibliotecaInteligente.DTOs.LivroDTO;
 import com.alura.BibliotecaInteligente.Entity.Livro;
 import com.alura.BibliotecaInteligente.Repository.LivroRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LivroService {
     private final LivroRepository livroRepository;
+    private static final Logger logger = LoggerFactory.getLogger(LivroService.class);
 
     public LivroDTO converterParaDto(Livro livro){
         List<String> categorias = new ArrayList<>();
@@ -29,6 +32,7 @@ public class LivroService {
                 livro.getEstoque(),
                 livro.getAnoPublicacao(),
                 livro.getAutor().getNome(),
+                livro.getAutor().getId(),
                 categorias
         );
     }
@@ -75,6 +79,22 @@ public class LivroService {
         List<LivroDTO> dtos = new ArrayList<>();
 
         caros.forEach(l -> {
+            dtos.add(converterParaDto(l));
+        });
+
+        return dtos;
+    }
+
+    public List<LivroDTO> livroComEstoqueVazio(){
+        List<Livro> livros = livroRepository.estoqueVazio();
+
+        if (livros.isEmpty()){
+            logger.info("Não existe nenhum livro sem estoque.");
+        }
+
+        List<LivroDTO> dtos = new ArrayList<>();
+
+        livros.forEach(l -> {
             dtos.add(converterParaDto(l));
         });
 

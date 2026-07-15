@@ -32,4 +32,9 @@ public class LivroController {
         return livroService.livrosCaros();
     }
 
+    @GetMapping("/estoque/vazio")
+    public List<LivroDTO> estoqueVazio(){
+        return livroService.livroComEstoqueVazio();
+    }
+
 }
