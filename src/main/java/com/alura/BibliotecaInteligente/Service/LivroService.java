@@ -80,6 +80,22 @@ public class LivroService {
          return livroDTO;
     }
 
+    public LivroDTO reajusteLivro(Long id, LivroDTO livroDTO){
+        Livro livroRep = livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livro não encontrado."));
+        Autor autor = autorRepository.findById(livroDTO.autor().id()).orElseThrow(() -> new RuntimeException("Erro! Autor nao encontrado"));
+
+        livroRep.setTitulo(livroDTO.titulo());
+        livroRep.setIsbn(livroDTO.isbn());
+        livroRep.setPreco(livroDTO.preco());
+        livroRep.setAutor(autor);
+        livroRep.setAnoPublicacao(livroDTO.anoPublicacao());
+        livroRep.setEstoque(livroDTO.estoque());
+
+        livroRepository.save(livroRep);
+
+        return converterParaDto(livroRep);
+    }
+
     public List<LivroDTO> obterTodosOsLivrosDTO(){
         List<Livro> livros = livroRepository.findAll();
 

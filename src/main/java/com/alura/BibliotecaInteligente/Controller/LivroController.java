@@ -39,4 +39,9 @@ public class LivroController {
         return livroService.livroComEstoqueVazio();
     }
 
+    @PutMapping("/reajuste/{id}")
+    public LivroDTO reajuseDePreco (@RequestBody LivroDTO livroDTO, @PathVariable Long id){
+        return livroService.reajusteLivro(id, livroDTO);
+    }
+
 }
